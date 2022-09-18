@@ -1,5 +1,16 @@
+import React from "react";
+import Home from "./components/Pages/Home";
+import { Typography } from "@mui/material";
+
 function App() {
-  return <div className="App">defect tracker</div>;
+  return (
+    <>
+      <Typography variant="h3" sx={{ textAlign: "center" }}>
+        Defect Tracker
+      </Typography>
+      <Home />
+    </>
+  );
 }
 
 export default App;
