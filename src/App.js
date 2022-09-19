@@ -1,14 +1,16 @@
 import React from "react";
 import Home from "./components/Pages/Home";
-import { Typography } from "@mui/material";
+import { Typography, Divider } from "@mui/material";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <Typography variant="h3" sx={{ textAlign: "center" }}>
-        Defect Tracker
-      </Typography>
-      <Home />
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />}></Route>
+        </Routes>
+      </Router>
     </>
   );
 }

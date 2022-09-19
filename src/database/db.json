@@ -2,35 +2,19 @@
   "defects": [
     {
       "id": 1,
-      "defect_title": "defects in tyre",
+      "defect_title": "defects in tyre bvv bvhfhh bvjjf bjhjdhf jhjkhj",
       "defect_assigned": "Priyanka",
-      "defect_status": "new",
+      "defect_status": "New",
       "defect_priority": "2",
       "defect_created": "2022-10-10"
     },
     {
       "defect_number": "",
-      "defect_title": "abc",
+      "defect_title": "defect",
       "defect_status": "",
       "defect_priority": "",
       "defcet_created": "",
       "id": 2
-    },
-    {
-      "id": 3,
-      "defect_number": "",
-      "defect_title": "qbcdd",
-      "defect_status": "",
-      "defect_priority": "",
-      "defcet_created": ""
-    },
-    {
-      "id": 4,
-      "defect_number": "",
-      "defect_title": "qbcddff",
-      "defect_status": "",
-      "defect_priority": "",
-      "defcet_created": ""
     }
   ]
 }
