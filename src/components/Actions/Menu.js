@@ -1,11 +1,26 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
+import { deleteDefectById, getDefectsFromApi } from "../../service/api";
 
 export default function BasicMenu(props) {
-  const { open, onClose } = props;
+  const Navigate = useNavigate();
+  const { open, onClose, openMenu, defect_id, setDefects } = props;
+  console.log(defect_id);
   if (!open) return null;
+
+  const editClickHandler = () => {
+    onClose();
+    Navigate(`/edit-defects/${defect_id}`);
+  };
+
+  const deleteClickHandler = async () => {
+    onClose();
+    await deleteDefectById(defect_id);
+    let { data } = await getDefectsFromApi();
+    setDefects(data);
+  };
 
   return (
     <div>
@@ -13,12 +28,14 @@ export default function BasicMenu(props) {
         id="basic-menu"
         open={open}
         onClose={onClose}
+        anchorEl={openMenu}
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={onClose}>Edit</MenuItem>
-        <MenuItem onClick={onClose}>Delete</MenuItem>
+        <MenuItem onClick={editClickHandler}>Edit</MenuItem>
+        <MenuItem onClick={deleteClickHandler}>Delete</MenuItem>
+        <MenuItem onClick={onClose}>Move</MenuItem>
       </Menu>
     </div>
   );

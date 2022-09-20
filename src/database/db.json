@@ -2,19 +2,11 @@
   "defects": [
     {
       "id": 1,
-      "defect_title": "defects in tyre bvv bvhfhh bvjjf bjhjdhf jhjkhj",
-      "defect_assigned": "Priyanka",
-      "defect_status": "New",
-      "defect_priority": "2",
-      "defect_created": "2022-10-10"
-    },
-    {
       "defect_number": "",
-      "defect_title": "defect",
+      "defect_title": "cannot select elements from dropdown",
       "defect_status": "",
       "defect_priority": "",
-      "defcet_created": "",
-      "id": 2
+      "defcet_created": ""
     }
   ]
 }

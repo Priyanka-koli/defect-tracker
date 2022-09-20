@@ -92,6 +92,7 @@ const AddDefects = () => {
               defect_status={defect.defect_status}
               defect_priority={defect.defect_priority}
               defcet_created={defect.defect_created}
+              setDefects={setDefects}
             />
           ))}
         </StyledChildBox>

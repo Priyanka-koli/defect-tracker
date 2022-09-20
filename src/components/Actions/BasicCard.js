@@ -7,10 +7,10 @@ import {
   Box,
   Grid,
   Item,
-  Button,
 } from "@mui/material/";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import BasicMenu from "./Menu";
+import Buttons from "./Buttons";
 
 import {
   StyledCard,
@@ -24,10 +24,13 @@ function stringAvatar(name) {
 }
 
 export default function BasicCard(props) {
-  const [openMenu, setOpenMenu] = useState(false);
-
-  const menuIconClickHandler = () => {
-    setOpenMenu(true);
+  const [openMenu, setOpenMenu] = useState(null);
+  const open = Boolean(openMenu);
+  console.log(open);
+  const menuIconClickHandler = (event) => {
+    console.log(event.currentTarget);
+    setOpenMenu(event.currentTarget);
+    console.log(openMenu);
   };
   const {
     defect_number,
@@ -36,6 +39,7 @@ export default function BasicCard(props) {
     defect_status,
     defect_priority,
     defect_created,
+    setDefects,
   } = props;
 
   return (
@@ -56,23 +60,31 @@ export default function BasicCard(props) {
             {`${defect_number}: ${defect_title}`}
           </Typography>
           <BasicMenu
-            open={openMenu}
+            open={open}
             onClose={() => setOpenMenu(false)}
+            openMenu={openMenu}
+            defect_id={defect_number}
+            setDefects={setDefects}
             /*  data={expenseDetails} */
           ></BasicMenu>
-          <Button
-            sx={{
+          <Buttons
+            styles={{
               flex: "1",
               minWidth: "0px",
               padding: "0px",
               color: "#000000",
-              alignItems: "flex-start",
-              backgroundColor: "#ffffff",
+              alignItems: "flex-end",
+              backgroundColor: "transparent",
+              height: "20px",
+              boxShadow: "none",
+              "&:hover": {
+                boxShadow: "none",
+                backgroundColor: "transparent",
+              },
             }}
             onClick={menuIconClickHandler}
-          >
-            <MoreVertIcon fontSize="small"></MoreVertIcon>
-          </Button>
+            endicon={<MoreVertIcon fontSize="small" />}
+          ></Buttons>
         </Box>
         <StyledBox>
           <Avatar
