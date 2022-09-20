@@ -3,9 +3,15 @@ import Buttons from "../Actions/Buttons";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import TextFields from "../Actions/TextFields";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { addDefectsToApi, getDefectsFromApi } from "../../service/api";
+import {
+  addDefectsToApi,
+  getDefectsFromApi,
+  getDefectsByIdFromApi,
+  editDefectById,
+} from "../../service/api";
 import BasicCards from "../Actions/BasicCard";
 import { Box, Typography } from "@mui/material";
+import dragula from "dragula";
 import {
   StyledContainerBox,
   StyledBoxHeading,
@@ -15,7 +21,6 @@ import {
 
 const INITIAL_VALUES = {
   id: "",
-  defect_number: "",
   defect_title: "",
   defect_status: "",
   defect_priority: "",
@@ -25,12 +30,57 @@ const AddDefects = () => {
   const [showInput, setShowInput] = useState(false);
   const [defects, setDefects] = useState([]);
   const [newDefect, setNewDefect] = useState(INITIAL_VALUES);
+  const [updatedDefect, setUpdatedDefect] = useState(INITIAL_VALUES);
 
   const getAllDefects = async () => {
     let { data } = await getDefectsFromApi();
     setDefects(data);
   };
 
+  const getElementStatus = (elementId) => {
+    switch (elementId) {
+      case "backlogs-box":
+        return "New";
+      case "on-hold-box":
+        return "On Hold";
+      case "in-development":
+        return "In progress";
+      case "qa-testing-box":
+        return "In QA";
+      case "closed-box":
+        return "Closed";
+    }
+  };
+
+  const dragAndDropHandler = () => {
+    dragula(
+      [
+        document.querySelector("#backlogs-box"),
+        document.querySelector("#on-hold-box"),
+        document.querySelector("#in-development"),
+        document.querySelector("#qa-testing-box"),
+        document.querySelector("#closed-box"),
+      ],
+      {
+        removeOnSpill: true,
+      }
+    )
+      .on("drag", function (el, event) {})
+      .on("drop", async function (el, event) {
+        const elementId = el.id.split("-")[1];
+        const status = getElementStatus(String(event.id));
+        const dataToBeUpdated = defects.filter((defect, id) => {
+          return defect.id == Number(elementId);
+        });
+        const newData = { ...dataToBeUpdated[0], ["defect_status"]: status };
+        await editDefectById(newData, elementId);
+        await getAllDefects();
+      });
+  };
+
+  useEffect(() => {
+    dragAndDropHandler();
+  }, [defects]);
   useEffect(() => {
     getAllDefects();
   }, []);
@@ -52,7 +102,7 @@ const AddDefects = () => {
   return (
     <>
       <StyledContainerBox>
-        <StyledChildBox>
+        <StyledChildBox id="backlogs-box">
           <StyledBoxHeading variant="h6">Backlogs</StyledBoxHeading>
           <StyledVerticalBox>
             <Buttons
@@ -85,7 +135,7 @@ const AddDefects = () => {
 
           {defects.map((defect) => (
             <BasicCards
-              key={defect.defect_title}
+              key={`${defect.defect_title} - ${defect.defect_number}`}
               defect_number={defect.id}
               avtar_string="Priyanka Koli"
               defect_title={defect.defect_title}
@@ -96,19 +146,19 @@ const AddDefects = () => {
             />
           ))}
         </StyledChildBox>
-        <StyledChildBox>
+        <StyledChildBox id="on-hold-box">
           <StyledBoxHeading variant="h6">On Hold</StyledBoxHeading>
           <StyledVerticalBox>bcs</StyledVerticalBox>
         </StyledChildBox>
-        <StyledChildBox>
+        <StyledChildBox id="in-development">
           <StyledBoxHeading variant="h6">In Development</StyledBoxHeading>
           <StyledVerticalBox>bcs</StyledVerticalBox>
         </StyledChildBox>
-        <StyledChildBox>
+        <StyledChildBox id="qa-testing-box">
           <StyledBoxHeading variant="h6">QA Testing</StyledBoxHeading>
           <StyledVerticalBox>bcs</StyledVerticalBox>
         </StyledChildBox>
-        <StyledChildBox>
+        <StyledChildBox id="closed-box">
           <StyledBoxHeading variant="h6">Closed</StyledBoxHeading>
           <StyledVerticalBox>bcs</StyledVerticalBox>
         </StyledChildBox>

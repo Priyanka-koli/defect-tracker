@@ -2,10 +2,37 @@
   "defects": [
     {
       "id": 1,
-      "defect_number": "",
-      "defect_title": "cannot select elements from dropdown",
-      "defect_status": "",
-      "defect_priority": "",
+      "defect_title": "Change title not working correctly",
+      "defect_status": "On Hold",
+      "defect_priority": "1",
+      "defcet_created": ""
+    },
+    {
+      "id": 2,
+      "defect_title": "Change color",
+      "defect_status": "New",
+      "defect_priority": "1",
+      "defcet_created": ""
+    },
+    {
+      "id": 3,
+      "defect_title": "Not getting values",
+      "defect_status": "New",
+      "defect_priority": "1",
+      "defcet_created": ""
+    },
+    {
+      "id": 4,
+      "defect_title": "Need to update state",
+      "defect_status": "New",
+      "defect_priority": "1",
+      "defcet_created": ""
+    },
+    {
+      "id": 5,
+      "defect_title": "wrong values",
+      "defect_status": "New",
+      "defect_priority": "1",
       "defcet_created": ""
     }
   ]

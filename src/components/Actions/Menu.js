@@ -7,7 +7,6 @@ import { deleteDefectById, getDefectsFromApi } from "../../service/api";
 export default function BasicMenu(props) {
   const Navigate = useNavigate();
   const { open, onClose, openMenu, defect_id, setDefects } = props;
-  console.log(defect_id);
   if (!open) return null;
 
   const editClickHandler = () => {

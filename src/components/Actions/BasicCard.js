@@ -26,11 +26,8 @@ function stringAvatar(name) {
 export default function BasicCard(props) {
   const [openMenu, setOpenMenu] = useState(null);
   const open = Boolean(openMenu);
-  console.log(open);
   const menuIconClickHandler = (event) => {
-    console.log(event.currentTarget);
     setOpenMenu(event.currentTarget);
-    console.log(openMenu);
   };
   const {
     defect_number,
@@ -43,7 +40,7 @@ export default function BasicCard(props) {
   } = props;
 
   return (
-    <StyledCard>
+    <StyledCard id={`card-${defect_number}`}>
       <StyledCardContent>
         <Box
           sx={{
