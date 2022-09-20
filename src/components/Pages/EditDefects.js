@@ -8,7 +8,6 @@ import {
   Paper,
   Button,
 } from "@mui/material";
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import { getDefectsByIdFromApi, editDefectById } from "../../service/api";
 const INITIAL_VALUES = {
   id: "",
@@ -47,25 +46,41 @@ const EditDefects = () => {
       <Grid sx={{ align: "center" }}>
         <Paper sx={{ padding: "30px 20px", width: "50%", margin: "30px auto" }}>
           <Grid sx={{ align: "center" }}>
-            <Avatar sx={{ backgroundColor: "primary", align: "center" }}>
-              <CurrencyExchangeIcon sx={{ fontSize: "Medium" }} />
-            </Avatar>
-            <Typography variant="h4"> Edit Expenses</Typography>
-            <Typography variant="caption">
-              Please fill this form to add your expenses
-            </Typography>
+            <Typography variant="h4"> Edit defects</Typography>
           </Grid>
           <form onSubmit={submitHandler}>
             <TextField
               fullWidth
-              id="expense-title"
-              label="Expense Title"
+              id="defect-title"
+              label="Defect Title"
               variant="filled"
-              helperText="Please enter expense title"
+              helperText="Please enter defect title"
               margin="normal"
               onChange={onChangeHandler}
               name="defect_title"
               value={defects.defect_title}
+            />
+            <TextField
+              fullWidth
+              id="defect-status"
+              label="Defect Status"
+              variant="filled"
+              helperText="Please enter defect status"
+              margin="normal"
+              onChange={onChangeHandler}
+              name="defect_status"
+              value={defects.defect_status}
+            />
+            <TextField
+              fullWidth
+              id="defect-priority"
+              label="Defect Priority"
+              variant="filled"
+              helperText="Please enter defect priority"
+              margin="normal"
+              onChange={onChangeHandler}
+              name="defect_priority"
+              value={defects.defect_priority}
             />
 
             <Button variant="contained" type="submit" sx={{ color: "primary" }}>
