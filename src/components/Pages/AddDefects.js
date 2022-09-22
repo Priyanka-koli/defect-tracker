@@ -5,12 +5,10 @@ import TextFields from "../Actions/TextFields";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import {
   addDefectsToApi,
-  getDefectsFromApi,
-  getDefectsByIdFromApi,
   editDefectById,
+  getDefectsFromApi,
 } from "../../service/api";
 import BasicCards from "../Actions/BasicCard";
-import { Box, Typography } from "@mui/material";
 import dragula from "dragula";
 import {
   StyledContainerBox,
@@ -24,18 +22,11 @@ const INITIAL_VALUES = {
   defect_title: "",
   defect_status: "",
   defect_priority: "",
-  defcet_created: "",
+  defect_created: "",
 };
-const AddDefects = () => {
+const AddDefects = ({ defects, setDefects }) => {
   const [showInput, setShowInput] = useState(false);
-  const [defects, setDefects] = useState([]);
   const [newDefect, setNewDefect] = useState(INITIAL_VALUES);
-  const [updatedDefect, setUpdatedDefect] = useState(INITIAL_VALUES);
-
-  const getAllDefects = async () => {
-    let { data } = await getDefectsFromApi();
-    setDefects(data);
-  };
 
   const getElementStatus = (elementId) => {
     switch (elementId) {
@@ -74,16 +65,14 @@ const AddDefects = () => {
         });
         const newData = { ...dataToBeUpdated[0], ["defect_status"]: status };
         await editDefectById(newData, elementId);
-        await getAllDefects();
+        let { data } = await getDefectsFromApi();
+        setDefects(data);
       });
   };
 
   useEffect(() => {
     dragAndDropHandler();
   }, [defects]);
-  useEffect(() => {
-    getAllDefects();
-  }, []);
 
   const clickHandler = () => {
     setShowInput(!showInput);
@@ -93,9 +82,13 @@ const AddDefects = () => {
     setNewDefect({ ...newDefect, [event.target.name]: event.target.value });
   };
   const addDefectHandler = async () => {
+    newDefect.id = defects[defects.length - 1].id + 1;
+    newDefect.defect_status = "New";
+    newDefect.defect_priority = "0";
+    newDefect.defect_created = new Date().toLocaleDateString();
     await addDefectsToApi(newDefect);
-    getAllDefects();
-    //after submitting setting input filed values to empty
+    defects.push(newDefect);
+    setDefects(defects);
     setNewDefect(INITIAL_VALUES);
     setShowInput(false);
   };
@@ -135,14 +128,11 @@ const AddDefects = () => {
 
           {defects.map((defect) => (
             <BasicCards
-              key={`${defect.defect_title} - ${defect.defect_number}`}
-              defect_number={defect.id}
+              key={`${defect.defect_title} - ${defect.id}`}
               avtar_string="Priyanka Koli"
-              defect_title={defect.defect_title}
-              defect_status={defect.defect_status}
-              defect_priority={defect.defect_priority}
-              defcet_created={defect.defect_created}
+              defect={defect}
               setDefects={setDefects}
+              allDefects={defects}
             />
           ))}
         </StyledChildBox>

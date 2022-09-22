@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Avatar,
-  Box,
-  Grid,
-  Item,
-} from "@mui/material/";
+import { Typography, Avatar, Box, Grid, Item } from "@mui/material/";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import BasicMenu from "./Menu";
 import Buttons from "./Buttons";
@@ -23,24 +15,20 @@ function stringAvatar(name) {
   };
 }
 
-export default function BasicCard(props) {
+export default function BasicCard({
+  defect,
+  setDefects,
+  avtar_string,
+  allDefects,
+}) {
   const [openMenu, setOpenMenu] = useState(null);
   const open = Boolean(openMenu);
   const menuIconClickHandler = (event) => {
     setOpenMenu(event.currentTarget);
   };
-  const {
-    defect_number,
-    avtar_string,
-    defect_title,
-    defect_status,
-    defect_priority,
-    defect_created,
-    setDefects,
-  } = props;
 
   return (
-    <StyledCard id={`card-${defect_number}`}>
+    <StyledCard id={`card-${defect.id}`}>
       <StyledCardContent>
         <Box
           sx={{
@@ -54,14 +42,15 @@ export default function BasicCard(props) {
             sx={{ fontSize: "13px", wordWrap: "break-word", flex: "5" }}
             gutterBottom
           >
-            {`${defect_number}: ${defect_title}`}
+            {`${defect.id}: ${defect.defect_title}`}
           </Typography>
           <BasicMenu
             open={open}
             onClose={() => setOpenMenu(false)}
             openMenu={openMenu}
-            defect_id={defect_number}
+            defect_id={defect.id}
             setDefects={setDefects}
+            allDefects={allDefects}
             /*  data={expenseDetails} */
           ></BasicMenu>
           <Buttons
@@ -100,12 +89,14 @@ export default function BasicCard(props) {
               <Typography sx={{ fontSize: "11px" }}>Created</Typography>
             </Grid>
             <Grid xs={4}>
-              <Typography sx={{ fontSize: "11px" }}>{defect_status}</Typography>
               <Typography sx={{ fontSize: "11px" }}>
-                {defect_priority}
+                {defect.defect_status}
               </Typography>
               <Typography sx={{ fontSize: "11px" }}>
-                {defect_created}
+                {defect.defect_priority}
+              </Typography>
+              <Typography sx={{ fontSize: "11px" }}>
+                {defect.defect_created}
               </Typography>
             </Grid>
           </Grid>

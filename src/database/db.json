@@ -1,23 +1,9 @@
 {
   "defects": [
     {
-      "id": 1,
-      "defect_title": "Change title not working correctly",
-      "defect_status": "On Hold",
-      "defect_priority": "1",
-      "defcet_created": ""
-    },
-    {
-      "id": 2,
-      "defect_title": "Change color",
-      "defect_status": "New",
-      "defect_priority": "1",
-      "defcet_created": ""
-    },
-    {
       "id": 3,
       "defect_title": "Not getting values",
-      "defect_status": "New",
+      "defect_status": "On Hold",
       "defect_priority": "1",
       "defcet_created": ""
     },
@@ -25,15 +11,22 @@
       "id": 4,
       "defect_title": "Need to update state",
       "defect_status": "New",
-      "defect_priority": "1",
+      "defect_priority": "2",
       "defcet_created": ""
     },
     {
       "id": 5,
-      "defect_title": "wrong values",
+      "defect_title": "add new title",
       "defect_status": "New",
-      "defect_priority": "1",
-      "defcet_created": ""
+      "defect_priority": "0",
+      "defect_created": "9/22/2022"
+    },
+    {
+      "id": 6,
+      "defect_title": "add new status",
+      "defect_status": "New",
+      "defect_priority": "0",
+      "defect_created": "9/22/2022"
     }
   ]
 }

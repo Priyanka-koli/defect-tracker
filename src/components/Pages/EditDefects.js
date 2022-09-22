@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Avatar,
-  TextField,
-  Grid,
-  Typography,
-  Paper,
-  Button,
-} from "@mui/material";
+import { TextField, Grid, Typography, Paper, Button } from "@mui/material";
 import { getDefectsByIdFromApi, editDefectById } from "../../service/api";
 const INITIAL_VALUES = {
   id: "",
@@ -15,7 +8,7 @@ const INITIAL_VALUES = {
   defect_title: "",
   defect_status: "",
   defect_priority: "",
-  defcet_created: "",
+  defect_created: "",
 };
 const EditDefects = () => {
   const [defects, setDefects] = useState(INITIAL_VALUES);
